@@ -15,15 +15,15 @@ ELF	= $(PROJ).elf
 HEX	= $(PROJ).hex
 BIN	= $(PROJ).bin
 
-GPR = guitarzero.gpr
+GPR = guitar_zero.gpr
 
 all:: $(BIN)
 
 $(HEX): $(ELF)
-	$(OBJCOPY) -O ihex $(PROJ).elf $(PROJ).hex
+	$(OBJCOPY) -O ihex $(ELF) $(HEX)
 
 $(BIN): $(ELF)
-	$(OBJCOPY) -O binary $(PROJ).elf $(PROJ).bin
+	$(OBJCOPY) -O binary $(ELF) $(BIN)
 
 $(ELF):: FORCE
 	$(GPRBUILD) -XBUILD=$(BUILD) $(GPR)
@@ -33,7 +33,6 @@ flash:: $(BIN)
 	$(STFLASH) write $(BIN) 0x8000000
 
 clean::
-	$(MAKE) -C report clean
 	$(GPRCLEAN)
 	$(RM) $(ELF) $(HEX) $(OBJ) $(BIN)
 
