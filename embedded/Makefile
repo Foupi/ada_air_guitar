@@ -26,14 +26,14 @@ $(BIN): $(ELF)
 	$(OBJCOPY) -O binary $(ELF) $(BIN)
 
 $(ELF):: FORCE
-	$(GPRBUILD) -XBUILD=$(BUILD) $(GPR)
+	$(GPRBUILD) -j`nproc` -XBUILD=$(BUILD) $(GPR)
 	cp $(BUILDDIR)/$(PROJ) $(ELF)
 
 flash:: $(BIN)
 	$(STFLASH) write $(BIN) 0x8000000
 
 clean::
-	$(GPRCLEAN)
+	$(GPRCLEAN) -r
 	$(RM) $(ELF) $(HEX) $(OBJ) $(BIN)
 
 FORCE:
