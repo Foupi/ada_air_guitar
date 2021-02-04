@@ -33,7 +33,7 @@ package body Sensor is
       delay until Clock + Period_10_Microseconds;
       Self.Pin_Trigger.Clear;
 
-      DurationMicroseconds := Float (PulseIn (Self.Pin_Echo, High));
+      DurationMicroseconds := Float (PulseInHigh (Self.Pin_Echo));
 
       SpeedOfSonudInCmPerMs := 0.033_13 + 0.000_060_6 * 19.307;
 
@@ -47,33 +47,35 @@ package body Sensor is
 
    end GetDistance;
 
-   function PulseIn
-     (Pin_Echo : GPIO_Point; Value : Pin_Value := High;
-      Timeout  : Time_Span := Seconds (5)) return Duration
+   function PulseInHigh
+     (Pin_Echo : STM32.GPIO.GPIO_Point; Timeout : Time_Span := Seconds (5))
+      return Duration
    is
+      Timeout_Time          : constant Time := Clock + Timeout;
+      Time_Start, Time_Stop : Time;
    begin
-      --  Reads a pulse (either HIGH or LOW) on a pin. For example, if value
-      --  is HIGH, pulseIn() waits for the pin to go from LOW to HIGH, starts
-      --  timing, then waits for the pin to go LOW and stops timing. Returns
-      --  the length of the pulse in microseconds or gives up and returns 0
-      --  if no complete pulse was received within the timeout.
 
-      --        while ((*portInputRegister(port) & bit) == stateMask)
-      --  if (numloops++ == maxloops)
-      --      return 0;
+      --  wait to the pin to go high
+      while STM32.GPIO.Set (Pin_Echo) /= True loop
+         --  if timeout limit is met, return a 0 duration
+         if Clock >= Timeout_Time then
+            return To_Duration (Nanoseconds (0));
+         end if;
+      end loop;
 
-      --        // wait for the pulse to start
-      --        while ((*portInputRegister(port) & bit) != stateMask)
-      --                if (numloops++ == maxloops)
-      --                        return 0;
+      Time_Start := Clock; -- get current time
 
-      --        // wait for the pulse to stop
-      --        while ((*portInputRegister(port) & bit) == stateMask) {
-      --                if (numloops++ == maxloops)
-      --                        return 0;
-      --                width++;
-      --        }
-      return To_Duration (Microseconds (20));
-   end PulseIn;
+      --  wait for pin to go low
+      while STM32.GPIO.Set (Pin_Echo) = True loop
+         --  if timeout limit is met, return a 0 duration
+         if Clock >= Timeout_Time then
+            return To_Duration (Nanoseconds (0));
+         end if;
+      end loop;
+
+      Time_Stop := Clock;
+
+      return To_Duration (Time_Stop - Time_Start);
+   end PulseInHigh;
 
 end Sensor;

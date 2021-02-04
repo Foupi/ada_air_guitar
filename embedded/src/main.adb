@@ -11,8 +11,9 @@ procedure Main is
    Next_Release    : Time               := Clock;
    Choice          : Boolean            := True;
    Distance_Sensor : Sonar              :=
-     (Pin_Trigger => STM32.Device.PA4, Pin_Echo => STM32.Device.PA6);
+     (Pin_Trigger => STM32.Device.PA6, Pin_Echo => STM32.Device.PA4);
    Distance : Float;
+   D        : Integer;
 begin
 
    STM32.Board.Initialize_LEDs;
@@ -30,6 +31,9 @@ begin
      (Distance_Sensor.Pin_Echo,
       (Mode => STM32.GPIO.Mode_In, Resistors => STM32.GPIO.Floating));
 
+   Distance_Sensor.Pin_Trigger.Clear;
+   Distance_Sensor.Pin_Echo.Clear;
+
    loop
 
       if STM32.User_Button.Has_Been_Pressed then
@@ -37,17 +41,20 @@ begin
          STM32.Board.All_LEDs_Off;
       end if;
 
-      if Choice then
-         STM32.Board.Toggle (Green_LED);
-      else
-         STM32.Board.Toggle (Red_LED);
-      end if;
+      --  if Choice then
+      --     STM32.Board.Toggle (Green_LED);
+      --  else
+      --     STM32.Board.Toggle (Red_LED);
+      --  end if;
 
-      Distance := GetDistance (Self => Distance_Sensor);
+      STM32.Board.Toggle (Red_LED);
+      Distance := GetDistance (Distance_Sensor);
 
-      Put_Line ("Distance:" & Distance'Image);
+      D :=
+        (if Integer (Distance) < 100 then 100 * Integer (Distance)
+         else Integer (Distance));
 
-      Next_Release := Next_Release + Period;
+      Next_Release := Next_Release + Milliseconds (D);
       delay until Next_Release;
    end loop;
 end Main;
