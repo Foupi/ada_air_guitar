@@ -33,13 +33,15 @@ package body Sensor is
       delay until Clock + Period_10_Microseconds;
       Self.Pin_Trigger.Clear;
 
-      DurationMicroseconds := Float (PulseInHigh (Self.Pin_Echo));
+      DurationMicroseconds :=
+        Float (PulseInHigh (Self.Pin_Echo)) * 1_000_000.0;
+      --  multiply by 1_000_000 to have the correct unit
 
       SpeedOfSonudInCmPerMs := 0.033_13 + 0.000_060_6 * 19.307;
 
       DistanceCm := DurationMicroseconds / 2.0 * SpeedOfSonudInCmPerMs;
 
-      if DistanceCm <= 0.3 or DistanceCm >= 400.0 then
+      if DistanceCm <= 0.5 or DistanceCm >= 400.0 then
          return -1.0;
       else
          return DistanceCm;

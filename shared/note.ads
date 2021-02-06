@@ -2,19 +2,23 @@ with System.Storage_Elements;
 
 package Note is
 
-   -- A music note
-   type Notes is (C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B);
-   
-   -- Range of values for a serialized note.
+   type Notes is
+     (C, Csharp, D, Dsharp, E, F, Fsharp, G, Gsharp, A, Asharp, B, Nothing);
+   --  A music note
+
    subtype NoteByte is System.Storage_Elements.Storage_Element range 0 .. 11;
+   --  Range of values for a serialized note.
 
-   -- Translate the given note to a byte.
-   function NoteToByte (Note : in Notes) return NoteByte;
+   function NoteToByte (Note : Notes) return NoteByte;
+   --  Translate the given note to a byte.
 
-   -- Translate the given byte to a note.
-   function ByteToNote (Byte : in NoteByte) return Notes;
+   function ByteToNote (Byte : NoteByte) return Notes;
+   --  Translates the given byte to a note.
 
-   -- Translates the given note to a string.
-   function NoteToString (Note : in Notes) return String;
+   function IntegerToNote (Int : Integer) return Notes;
+   --  Translates the given Integer to a note.
+
+   function NoteToString (Note : Notes) return String;
+   --  Translates the given note to a string.
 
 end Note;
