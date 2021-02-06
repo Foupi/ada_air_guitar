@@ -1,6 +1,6 @@
-with "ADL/boards/stm32f429_discovery/stm32f429_discovery_full.gpr";
+with "adl/boards/stm32f429_discovery/stm32f429_discovery_full.gpr";
 
-project Guitar_Zero extends "drivers/examples/shared/common/common.gpr" is
+project Guitar_Zero extends "adl/examples/shared/common/common.gpr" is
 
   for Runtime ("Ada") use STM32F429_Discovery_Full'Runtime("Ada");
   for Target use "arm-eabi";
