@@ -1,5 +1,5 @@
-ADA AIR GUITAR - README
-=======================
+ADA AIR GUITAR
+==============
 
 Authors
 -------
@@ -102,3 +102,13 @@ Specification
 
 The project specification will be available in the `specification` folder, at
 the root of this repository.
+
+The specification shall hold:
+
+-   The software requirements data, holding the high-level requirements;
+-   The design description, holding the low-level requirements and the software
+    architecture;
+-   The trace data, holding the links between HLRs, LLRs and elements of the
+    architecture;
+-   Links towards the developed source code;
+-   The test cases.
