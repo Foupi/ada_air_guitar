@@ -28,16 +28,16 @@ The material used for this project was:
 -   A breadboard;
 -   An USB/USART cable;
 -   An USB/Micro-USB cable (used for flashing, but not necessary afterwards);
--   4 to 5 M/F wires (the fifth being used to connect the GND pin of the USART
-    cable to that of the board, as it is quite far away from the others);
+-   4 to 5 M/F wires (the fifth being used to connect the `GND` pin of the
+    USART cable to that of the board, as it is quite far away from the others);
 -   A PC.
 
 Here are the connections that shall be made:
 
--   HC-SR04 VCC     /   STM32 FIXME
--   HC-SR04 Trig    /   STM32 FIXME
--   HC-SR04 Echo    /   STM32 FIXME
--   HC-SR04 GND     /   STM32 GND
+-   HC-SR04 `VCC`   /   STM32 `5V`
+-   HC-SR04 `Trig`  /   STM32 `PE6`
+-   HC-SR04 `Echo`  /   STM32 `PE4`
+-   HC-SR04 `GND`   /   STM32 `GND`
 
 Dependencies
 ------------
@@ -61,15 +61,16 @@ You must first clone this Git repository:
 The `--recursive` option ensures that the submodule linked to the ADA Drivers
 Library (<https://github.com/AdaCore/Ada_Drivers_Library>) is cloned as well in
 the right place.
-Once the repository is cloned, go to the `embedded` folder:
+Once the repository is cloned, enter it:
 
--   `cd ada_air_guitar/embedded`
+-   `cd ada_air_guitar`
 
-This directory contains the code that is to be embedded on the microcontroller.
-There you can also find a Makefile. The `all` rule builds the `main.bin`
-binary, and the `flash` one flashes it on the board using `st-flash`.
-If you want the binary built and flashed at the same time, just call the
-`flash` rule:
+At the root of the repository, there is a Makefile, which defines an `all`
+rule, which creates both the binary that shall be flashed on the board and the
+one that shall be run from the PC ; and a `flash` rule, which flashes the
+embedded binary on the board.
+As the soundbox binary is not yet used, you can run the `flash` rule to both
+create and flash the embedded binary:
 
 -   `make flash`
 
@@ -88,9 +89,13 @@ Clean
 -----
 
 If you want to clean everything produced during the build, you can go to the
-`embedded` directory and call the `clean` rule of the Makefile:
+root of the repository and call the `clean` rule of the Makefile:
 
 -   `make clean`
+
+It shall remove any file build in the `embedded` and `soundbox` folders, and
+erase the `soundbox.elf` binary if it has been copied at the root of the
+repository.
 
 Specification
 -------------

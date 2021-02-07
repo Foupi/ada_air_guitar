@@ -17,9 +17,8 @@ all: $(ELF)
 prove:
 
 clean:
-	$(GPRCLEAN)
+	$(GPRCLEAN) -r
 	$(RM) $(ELF)
-	$(RM) -r $(BUILDDIR)
 
 FORCE:
 
