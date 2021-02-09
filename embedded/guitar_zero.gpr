@@ -13,7 +13,7 @@ project Guitar_Zero extends "adl/examples/shared/common/common.gpr" is
   package Compiler is
      for Default_Switches ("Ada") use
         STM32F429_Discovery_Full.Compiler'Default_Switches ("Ada") &
-        ("-gnatygO");
+        ("-gnatygO") & ("-gnata");
   end Compiler;
 
 end Guitar_Zero;
