@@ -16,18 +16,21 @@ the `Notes` type is an enumerated type, holding all the possible values a note
 produced by our program can have.
 
 A small API allows translation of a `Notes` to a single byte, to a `String` and
-to a `Float` frequency, and the translation of an `Integer` or of a single byte
-to a `Notes`.
+to a `Float` frequency, and the translation of a single byte to a `Notes`.
 
 Embedded
 --------
 
-The embedded codebase defines a class for the HC-SR04 sensor. It is
-instanciated using identifiers of the board's GPIOs connected to the sensor's
-`Trigger` and `Echo` pins, and defines a `GetDistance` method which returns an
-`Integer` representing the distance in centimeters detected by the sensor.
+A `Distance` type is defined as a range of 1-digit mantiss `Float` from `2.0`
+to `400.0`, corresponding to the distances the HC-SR04 sensor can measure.
 
-The `WaitButton` function shall block until a button press is detected.
+A `DistanceToNote` function allows translation of a `Distance` into a `Notes`.
+
+The embedded codebase defines a `Sonar` record representing the HC-SR04 sensor.
+It is instanciated using identifiers of the board's GPIOs connected to the
+sensor's `Trigger` and `Echo` pins, and defines a `GetDistance` method which
+returns an `Integer` representing the distance in centimeters detected by the
+sensor.
 
 The `UARTSendByte` function shall send the given byte on the given UART TX pin.
 

@@ -42,7 +42,7 @@ Here are the connections that shall be made:
 Dependencies
 ------------
 
-This project was made on Arch Linux, and should work on 
+This project was made on Arch Linux, and should work on any operating system.
 For building this project you will need:
 
 -   GNAT Community 2018 for ARM ELF (<https://www.adacore.com/download>),
@@ -79,9 +79,10 @@ Now the program is built and flashed on the board.
 Usage
 -----
 
-Once the program is flashed on the board, just move your hand or any object
-towards or away from the sensor: on the board's screen shall appear the
-distance detected and the corresponding note.
+Once the program is flashed on the board, just put your hand or any object
+in front of the sensor, at a distance greater than 2cm: on the board's screen
+shall appear the distance detected and the corresponding note (or a message
+stating that the note you tried to play does not exist).
 
 The UART connection and sound emission have not yet been implemented.
 
@@ -93,7 +94,7 @@ root of the repository and call the `clean` rule of the Makefile:
 
 -   `make clean`
 
-It shall remove any file build in the `embedded` and `soundbox` folders, and
+It shall remove any file built in the `embedded` and `soundbox` folders, and
 erase the `soundbox.elf` binary if it has been copied at the root of the
 repository.
 
@@ -103,12 +104,16 @@ Specification
 The project specification will be available in the `specification` folder, at
 the root of this repository.
 
-The specification shall hold:
+The specification currently holds:
 
 -   The software requirements data, holding the high-level requirements;
--   The design description, holding the low-level requirements and the software
-    architecture;
+-   A description of the software architecture;
+-   Links towards the developed source code.
+
+In the future, it shall hold:
+
+-   The design description, holding the low-level requirements;
 -   The trace data, holding the links between HLRs, LLRs and elements of the
     architecture;
--   Links towards the developed source code;
--   The test cases.
+-   The test cases for functions that could easily be tested (those not
+    involving I/O).
