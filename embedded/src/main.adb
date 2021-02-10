@@ -39,6 +39,12 @@ begin
    Distance_Sensor.Pin_Echo.Clear;
 
    loop
+      while not STM32.User_Button.Has_Been_Pressed loop
+         null;
+         --  Busy waiting! I wish there was another way to do it...
+      end loop;
+      --  Why hide the interrupts?
+
       Dist         := GetDistance (Distance_Sensor);
       Current_Note := DistanceToNote (Dist);
 
