@@ -1,10 +1,11 @@
 with STM32.GPIO;
 with STM32.Device;
 with STM32.User_Button;
-with Sensor;        use Sensor;
 with STM32.Board;   use STM32.Board;
 with Ada.Real_Time; use Ada.Real_Time;
-with HAL.Bitmap;
+
+with Note;          use Note;
+with Sensor;        use Sensor;
 with Screen;        use Screen;
 
 procedure Main is
@@ -14,6 +15,7 @@ procedure Main is
      (Pin_Trigger => STM32.Device.PE6, Pin_Echo => STM32.Device.PE4);
    Distance     : Float;
    Distance_Int : Integer;
+   Current_Note : Notes;
 begin
 
    STM32.Board.Initialize_LEDs;
@@ -22,16 +24,16 @@ begin
 
    ScreenSetup;
 
-   --  OUTPUT TRIGGER
    STM32.GPIO.Configure_IO
      (Distance_Sensor.Pin_Trigger,
       (Mode  => STM32.GPIO.Mode_Out, Output_Type => STM32.GPIO.Push_Pull,
        Speed => STM32.GPIO.Speed_100MHz, Resistors => STM32.GPIO.Floating));
+   --  OUTPUT TRIGGER
 
-   --  INPUT ECHO
    STM32.GPIO.Configure_IO
      (Distance_Sensor.Pin_Echo,
       (Mode => STM32.GPIO.Mode_In, Resistors => STM32.GPIO.Floating));
+   --  INPUT ECHO
 
    Distance_Sensor.Pin_Trigger.Clear;
    Distance_Sensor.Pin_Echo.Clear;
@@ -39,9 +41,13 @@ begin
    loop
       Distance     := GetDistance (Distance_Sensor);
       Distance_Int := Integer (Distance);
-      ScreenDisplay (Distance_Int);
+      Current_Note := IntegerToNote (Distance_Int);
+
+      ScreenDisplay (Distance_Int, Current_Note);
 
       Next_Release := Next_Release + Period;
       delay until Next_Release;
+      --  Wait until next period.
+
    end loop;
 end Main;

@@ -3,7 +3,6 @@ with HAL.Framebuffer;
 with STM32.Board; use STM32.Board;
 with LCD_Std_Out; use LCD_Std_Out;
 with BMP_Fonts; use BMP_Fonts;
-with Note; use Note;
 
 package body Screen is
 
@@ -20,14 +19,11 @@ package body Screen is
       LCD_Std_Out.Clear_Screen;
       Display.Update_Layer (1, Copy_Back => True);
    end ScreenSetup;
-   
-   procedure ScreenDisplay (Distance : Integer) is
-      Note : Notes;
+
+   procedure ScreenDisplay (Distance : Integer; Note : Notes) is
    begin
       LCD_Std_Out.Clear_Screen;
-      
-      Note := IntegerToNote (Distance);
-      
+
       LCD_Std_Out.Put (0, 0, "Dist:" & Distance'Image & "cm");
       LCD_Std_Out.Put (0, 50, "Note: " & NoteToString (Note));
    end ScreenDisplay;

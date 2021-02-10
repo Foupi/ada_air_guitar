@@ -10,12 +10,13 @@ package body Sensor is
       Put_Line ("");
    end Dump;
 
-   function GetDistance (Self : in out Sonar) return Float is
+   function GetDistance (Self : in out Sonar) return Distance is
       Period_2_Microseconds  : constant Time_Span := Microseconds (2);
       Period_10_Microseconds : constant Time_Span := Microseconds (10);
+      SpeedOfSonudInCmPerMs  : constant Float := 0.033_13 + 0.000_060_6
+        * 19.307;
       DurationMicroseconds   : Float;
-      SpeedOfSonudInCmPerMs  : Float;
-      DistanceCm             : Float;
+      DistanceCm             : Distance;
    begin
       --  Make sure that trigger pin is LOW.
       Self.Pin_Trigger.Set_Mode (HAL.GPIO.Output);
@@ -24,29 +25,23 @@ package body Sensor is
       --  wait 2 micro sec for state to register
       delay until Clock + Period_2_Microseconds;
 
-      --  Hold trigger for 10 microseconds, which is signal for sensor to
-      --  measure distance
-
       --  Self.Pin_Trigger.Set;
       STM32.GPIO.Set (Self.Pin_Trigger);
 
       delay until Clock + Period_10_Microseconds;
+      --  Hold trigger for 10 microseconds, which is signal for sensor to
+      --  measure distance
       Self.Pin_Trigger.Clear;
 
       DurationMicroseconds :=
         Float (PulseInHigh (Self.Pin_Echo)) * 1_000_000.0;
       --  multiply by 1_000_000 to have the correct unit
 
-      SpeedOfSonudInCmPerMs := 0.033_13 + 0.000_060_6 * 19.307;
-
       DistanceCm := DurationMicroseconds / 2.0 * SpeedOfSonudInCmPerMs;
+      --  Divide duration by 2 as it sound goes away from and then back to the
+      --  sonar.
 
-      if DistanceCm <= 0.5 or DistanceCm >= 400.0 then
-         return -1.0;
-      else
-         return DistanceCm;
-      end if;
-
+      return DistanceCm;
    end GetDistance;
 
    function PulseInHigh
