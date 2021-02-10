@@ -3,6 +3,8 @@ with STM32.Device;
 with STM32.GPIO;
 with Ada.Real_Time; use Ada.Real_Time;
 
+with Dist; use Dist;
+
 package Sensor is
 
    type Sonar is record
@@ -12,9 +14,6 @@ package Sensor is
 
    procedure Dump (Self : in out Sonar);
    --  Prints the sonar properties on the standard output.
-
-   subtype Distance is Float range 2.0 .. 400.0;
-   --  Set of distances that can be measured by the sensor.
 
    function GetDistance (Self : in out Sonar) return Distance;
    --  Returns the distance measured by the sensor.

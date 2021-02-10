@@ -16,7 +16,7 @@ package body Sensor is
       SpeedOfSonudInCmPerMs  : constant Float := 0.033_13 + 0.000_060_6
         * 19.307;
       DurationMicroseconds   : Float;
-      DistanceCm             : Distance;
+      DistanceCm             : Float;
    begin
       --  Make sure that trigger pin is LOW.
       Self.Pin_Trigger.Set_Mode (HAL.GPIO.Output);
@@ -41,7 +41,8 @@ package body Sensor is
       --  Divide duration by 2 as it sound goes away from and then back to the
       --  sonar.
 
-      return DistanceCm;
+      return Distance (DistanceCm);
+      --  return 30.0;
    end GetDistance;
 
    function PulseInHigh

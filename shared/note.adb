@@ -1,37 +1,5 @@
 package body Note is
 
-   function IntegerToNote (Int : Integer) return Notes is
-      Interval : constant Integer := 5;
-   begin
-      if Int <= Interval * (Notes'Pos (C) + 1) then
-         return C;         --  Do
-      elsif Int <= Interval * (Notes'Pos (Csharp) + 1) then
-         return Csharp;    --  Do#
-      elsif Int <= Interval * (Notes'Pos (D) + 1) then
-         return D;         --  Re
-      elsif Int <= Interval * (Notes'Pos (Dsharp) + 1) then
-         return Dsharp;    --  Re#
-      elsif Int <= Interval * (Notes'Pos (E) + 1) then
-         return E;         --  Mi
-      elsif Int <= Interval * (Notes'Pos (F) + 1) then
-         return F;         --  Fa
-      elsif Int <= Interval * (Notes'Pos (Fsharp) + 1) then
-         return Fsharp;    --  Fa#
-      elsif Int <= Interval * (Notes'Pos (G) + 1) then
-         return G;         --  Sol
-      elsif Int <= Interval * (Notes'Pos (Gsharp) + 1) then
-         return Gsharp;    --  Sol#
-      elsif Int <= Interval * (Notes'Pos (A) + 1) then
-         return A;         --  La
-      elsif Int <= Interval * (Notes'Pos (Asharp) + 1) then
-         return Asharp;    --  La#
-      elsif Int <= Interval * (Notes'Pos (B) + 1) then
-         return B;         --  Si
-      else
-         return Nothing;   -- Default note
-      end if;
-   end IntegerToNote;
-
    function NoteToString (Note : Notes) return String is
    begin
       case Note is

@@ -4,18 +4,18 @@ with STM32.User_Button;
 with STM32.Board;   use STM32.Board;
 with Ada.Real_Time; use Ada.Real_Time;
 
+with Dist;          use Dist;
 with Note;          use Note;
-with Sensor;        use Sensor;
 with Screen;        use Screen;
+with Sensor;        use Sensor;
 
 procedure Main is
    Period          : constant Time_Span := Milliseconds (300);
    Next_Release    : Time               := Clock;
    Distance_Sensor : Sonar              :=
      (Pin_Trigger => STM32.Device.PE6, Pin_Echo => STM32.Device.PE4);
-   Distance     : Float;
-   Distance_Int : Integer;
-   Current_Note : Notes;
+   Dist            : Distance;
+   Current_Note    : Notes;
 begin
 
    STM32.Board.Initialize_LEDs;
@@ -39,11 +39,10 @@ begin
    Distance_Sensor.Pin_Echo.Clear;
 
    loop
-      Distance     := GetDistance (Distance_Sensor);
-      Distance_Int := Integer (Distance);
-      Current_Note := IntegerToNote (Distance_Int);
+      Dist         := GetDistance (Distance_Sensor);
+      Current_Note := DistanceToNote (Dist);
 
-      ScreenDisplay (Distance_Int, Current_Note);
+      ScreenDisplay (Dist, Current_Note);
 
       Next_Release := Next_Release + Period;
       delay until Next_Release;

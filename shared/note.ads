@@ -15,9 +15,6 @@ package Note is
    function ByteToNote (Byte : NoteByte) return Notes;
    --  Translates the given byte to a note.
 
-   function IntegerToNote (Int : Integer) return Notes;
-   --  Translates the given Integer to a note.
-
    function NoteToString (Note : Notes) return String;
    --  Translates the given note to a string.
 
