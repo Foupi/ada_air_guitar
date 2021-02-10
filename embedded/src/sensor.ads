@@ -17,10 +17,6 @@ package Sensor is
 
 private
 
-   type Pin_Value is (Low, High);
-
-   for Pin_Value use (Low => 0, High => 1);
-
    function PulseInHigh
      (Pin_Echo : STM32.GPIO.GPIO_Point; Timeout : Time_Span := Seconds (5))
       return Duration;
