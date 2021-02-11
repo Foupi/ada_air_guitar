@@ -74,7 +74,8 @@ create and flash the embedded binary:
 
 -   `make flash`
 
-Now the program is built and flashed on the board.
+Now the program is built and flashed on the board: you can hit the `RESET`
+button of the board to start it.
 
 Usage
 -----
@@ -82,9 +83,10 @@ Usage
 Once the program is flashed on the board, just put your hand or any object
 in front of the sensor, at a distance greater than 2cm: on the board's screen
 shall appear the distance detected and the corresponding note (or a message
-stating that the note you tried to play does not exist).
+stating that the note you tried to play does not exist), the latter being sent
+on the UART.
 
-The UART connection and sound emission have not yet been implemented.
+The note reception and sound emission by the PC have not yet been implemented.
 
 Clean
 -----

@@ -32,11 +32,11 @@ sensor's `Trigger` and `Echo` pins, and defines a `GetDistance` method which
 returns an `Integer` representing the distance in centimeters detected by the
 sensor.
 
-The `UARTSendByte` function shall send the given byte on the given UART TX pin.
+The `UARTSendNote` function shall send the given note on the given UART TX pin.
 
 The `Main` loop shall call `WaitButton`, store the result of `GetDistance`,
-compute and store the corresponding note using `DistToNote`, then serialize
-this note in a byte using `NoteToByte`, and call `UARTSendByte` on this byte.
+compute and store the corresponding note using `DistToNote`, then call
+`UARTSendNote` on this note.
 
 Soundbox
 --------
