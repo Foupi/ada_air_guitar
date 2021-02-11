@@ -9,9 +9,6 @@ package Note is
    subtype NoteByte is System.Storage_Elements.Storage_Element range 0 .. 11;
    --  Range of values for a serialized note.
 
-   function NoteToByte (Note : Notes) return NoteByte;
-   --  Translate the given note to a byte.
-
    function ByteToNote (Byte : NoteByte) return Notes;
    --  Translates the given byte to a note.
 

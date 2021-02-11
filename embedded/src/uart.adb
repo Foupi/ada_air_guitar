@@ -1,3 +1,4 @@
+with HAL.UART; use HAL.UART;
 
 package body Uart is
 
@@ -22,11 +23,24 @@ package body Uart is
       Set_Flow_Control (Sender, No_Flow_Control);
 
       Enable (Sender);
+      --  FIXME Looks like Post fails at this point.
    end UARTSetup;
 
-   procedure UARTSendNote (Note : Notes) is
+   function UARTSendNote (Note : Notes) return Boolean is
+      Byte   : UInt8;
+      Data   : UART_Data_8b (1 .. 1);
+      Status : UART_Status;
    begin
-      null;
+      Byte := NoteToByte (Note);
+      Data (1) := Byte;
+
+      Sender.Transmit (Data, Status);
+      return Status = Ok;
    end UARTSendNote;
+
+   function NoteToByte (Note : Notes) return UInt8 is
+   begin
+      return Character'Pos ('a') + Notes'Pos (Note);
+   end NoteToByte;
 
 end Uart;
