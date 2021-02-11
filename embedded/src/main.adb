@@ -40,8 +40,6 @@ begin
    Distance_Sensor.Pin_Trigger.Clear;
    Distance_Sensor.Pin_Echo.Clear;
 
-   ScreenDebug ("Setup complete!");
-
    loop
       while not STM32.User_Button.Has_Been_Pressed loop
          null;
@@ -53,11 +51,13 @@ begin
       Current_Note := DistanceToNote (Dist);
 
       ScreenDisplay (Dist, Current_Note);
-      --  UARTSendNote (Current_Note);
+      if not UARTSendNote (Current_Note) then
+         exit;
+      end if;
 
       Next_Release := Next_Release + Period;
       delay until Next_Release;
       --  Wait until next period.
-
    end loop;
+
 end Main;
