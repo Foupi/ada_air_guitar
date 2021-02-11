@@ -32,10 +32,4 @@ package body Note is
       end case;
    end NoteToString;
 
-   function ByteToNote (Byte : NoteByte) return Notes is
-      pragma Unreferenced (Byte);
-   begin
-      return A;
-   end ByteToNote;
-
 end Note;

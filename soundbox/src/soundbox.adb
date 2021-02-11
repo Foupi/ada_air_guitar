@@ -1,8 +1,16 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with Note; use Note;
+
+with Note;   use Note;
+with Serial; use Serial;
 
 procedure Soundbox is
-   Note : Notes := Asharp;
+   Note : Notes;
 begin
-   Put_Line(NoteToString(Note));
+   SerialSetup;
+
+   loop
+      Note := SerialReceiveNote;
+
+      Put_Line(NoteToString(Note));
+   end loop;
 end Soundbox;
