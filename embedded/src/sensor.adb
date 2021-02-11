@@ -1,14 +1,4 @@
-with Ada.Text_IO; use Ada.Text_IO;
-
 package body Sensor is
-
-   procedure Dump (Self : in out Sonar) is
-   begin
-      Put_Line ("Dump Sonar");
-      Put_Line ("Sonar.Pin_Trigger ->" & Self.Pin_Trigger.Pin'Image);
-      Put_Line ("Sonar.Pin_Echo    ->" & Self.Pin_Echo.Pin'Image);
-      Put_Line ("");
-   end Dump;
 
    function GetDistance (Self : in out Sonar) return Distance is
       Period_2_Microseconds  : constant Time_Span := Microseconds (2);

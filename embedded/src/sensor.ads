@@ -12,17 +12,10 @@ package Sensor is
       Pin_Echo    : STM32.GPIO.GPIO_Point := STM32.Device.PC6;
    end record;
 
-   procedure Dump (Self : in out Sonar);
-   --  Prints the sonar properties on the standard output.
-
    function GetDistance (Self : in out Sonar) return Distance;
    --  Returns the distance measured by the sensor.
 
 private
-
-   type Pin_Value is (Low, High);
-
-   for Pin_Value use (Low => 0, High => 1);
 
    function PulseInHigh
      (Pin_Echo : STM32.GPIO.GPIO_Point; Timeout : Time_Span := Seconds (5))
