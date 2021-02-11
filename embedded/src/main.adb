@@ -8,6 +8,7 @@ with Dist;          use Dist;
 with Note;          use Note;
 with Screen;        use Screen;
 with Sensor;        use Sensor;
+with Uart;          use Uart;
 
 procedure Main is
    Period          : constant Time_Span := Milliseconds (300);
@@ -23,6 +24,7 @@ begin
    All_LEDs_Off;
 
    ScreenSetup;
+   UARTSetup;
 
    STM32.GPIO.Configure_IO
      (Distance_Sensor.Pin_Trigger,
