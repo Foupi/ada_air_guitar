@@ -29,21 +29,14 @@ package body Uart is
       Enable (Sender);
    end UARTSetup;
 
-   function UARTSendNote (Note : Notes) return Boolean is
-      Byte   : UInt8;
+   function UART_Send_Byte (Byte : UInt8) return Boolean is
       Data   : UART_Data_8b (1 .. 1);
       Status : UART_Status;
    begin
-      Byte := NoteToByte (Note);
       Data (1) := Byte;
 
       Sender.Transmit (Data, Status);
       return Status = Ok;
-   end UARTSendNote;
-
-   function NoteToByte (Note : Notes) return UInt8 is
-   begin
-      return Notes'Pos (Note);
-   end NoteToByte;
+   end UART_Send_Byte;
 
 end Uart;

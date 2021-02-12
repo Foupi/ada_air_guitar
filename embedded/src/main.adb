@@ -8,7 +8,9 @@ with Dist;          use Dist;
 with Note;          use Note;
 with Screen;        use Screen;
 with Sensor;        use Sensor;
+with Serialization; use Serialization;
 with Uart;          use Uart;
+with HAL;
 
 procedure Main is
    Period          : constant Time_Span := Milliseconds (300);
@@ -17,6 +19,7 @@ procedure Main is
      (Pin_Trigger => STM32.Device.PE6, Pin_Echo => STM32.Device.PE4);
    Dist            : Distance;
    Current_Note    : Notes;
+   Byte            : Note_Byte;
 begin
 
    STM32.Board.Initialize_LEDs;
@@ -59,7 +62,10 @@ begin
       Current_Note := DistanceToNote (Dist);
       Screen_Display (Mid_Top, "Note: " & NoteToString (Current_Note));
 
-      if not UARTSendNote (Current_Note) then
+      Byte := Note_To_Byte (Current_Note);
+      Screen_Display (Mid_Bottom, "Byte: " & Byte'Image);
+
+      if not UART_Send_Byte (HAL.UInt8 (Byte)) then
          exit;
       end if;
 

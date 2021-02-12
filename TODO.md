@@ -6,11 +6,7 @@ This document presents tasks that are yet to accomplish.
 Features
 --------
 
--   Embedded: Add a message prompting to push the button
--   Embedded: Also print the byte sent on the UART
--   Embedded: When a crash occurs, display an error message
 -   Soundbox: Fix UART reception
--   Soundbox: Print received note on standard output
 -   Soundbox: Emit sound
 
 Specification
@@ -22,14 +18,18 @@ Specification
 -   Develop pre and post conditions meeting these requirements
 -   Write test cases for function that do not use I/O
 
+Debug
+-----
+
+-   Embedded: When a crash occurs, display an error message
+-   Soundbox: Print received note on standard output
+
 Refactoring
 -----------
 
 -   All:        Write everythng according to the ADA coding style (underscores
                 + camel-case...)
--   Shared:     Define a `Byte` type to serialize/deserialize a note
 -   Embedded:   Put all sensor GPIO initialization code in a sensor function
 -   Embedded:   Have functions return an error status instead of just crashing?
--   Embedded:   Make `NoteToByte` public and have the UART API only send a byte
 -   Soundbox:   Make `ByteToNote` public and have the Serial API only receive a
                 byte
