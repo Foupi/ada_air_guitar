@@ -45,6 +45,7 @@ Dependencies
 This project was made on Arch Linux, and should work on any operating system.
 For building this project you will need:
 
+-   The GNAT toolchain for the PC program;
 -   GNAT Community 2018 for ARM ELF (<https://www.adacore.com/download>),
     needed by ADL;
 -   The `arm-none-eabi` toolchain, needed for building binaries that can be run
@@ -69,13 +70,22 @@ At the root of the repository, there is a Makefile, which defines an `all`
 rule, which creates both the binary that shall be flashed on the board and the
 one that shall be run from the PC ; and a `flash` rule, which flashes the
 embedded binary on the board.
-As the soundbox binary is not yet used, you can run the `flash` rule to both
-create and flash the embedded binary:
+
+Therefore, you can first run the `all` rule, in order to create both binaries:
+
+-   `make all`
+
+You can then run the `flash` rule to flash the embedded binary on the board:
 
 -   `make flash`
 
-Now the program is built and flashed on the board: you can hit the `RESET`
-button of the board to start it.
+Now the embedded program is built and flashed on the board: you can hit the
+`RESET` button of the board to start it.
+
+Finally, you can run the soundbox binary, which was copied at the root of the
+repository by the rule `all`:
+
+-   `./soundbox.elf`
 
 Usage
 -----
@@ -86,7 +96,10 @@ shall appear the distance detected and the corresponding note (or a message
 stating that the note you tried to play does not exist), the latter being sent
 on the UART.
 
-The note reception and sound emission by the PC have not yet been implemented.
+Upon receiving the note from its connection from the board's UART, the PC
+program shall print on the standard output the note it received.
+
+Sound emission by the PC has not yet been implemented.
 
 Clean
 -----
@@ -97,8 +110,7 @@ root of the repository and call the `clean` rule of the Makefile:
 -   `make clean`
 
 It shall remove any file built in the `embedded` and `soundbox` folders, and
-erase the `soundbox.elf` binary if it has been copied at the root of the
-repository.
+erase the `soundbox.elf` binary if it was copied at the root of the repository.
 
 Specification
 -------------
