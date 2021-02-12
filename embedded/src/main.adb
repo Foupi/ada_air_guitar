@@ -40,17 +40,25 @@ begin
    Distance_Sensor.Pin_Trigger.Clear;
    Distance_Sensor.Pin_Echo.Clear;
 
+   Screen_Display (Mid_Top, "Setup complete!");
+
    loop
+      Screen_Display (Bottom, "Press the button");
+
       while not STM32.User_Button.Has_Been_Pressed loop
          null;
          --  Busy waiting! I wish there was another way to do it...
       end loop;
       --  Why hide the interrupts?
 
-      Dist         := GetDistance (Distance_Sensor);
-      Current_Note := DistanceToNote (Dist);
+      Screen_Clear;
 
-      ScreenDisplay (Dist, Current_Note);
+      Dist         := GetDistance (Distance_Sensor);
+      Screen_Display (Top, "Distance: " & Dist'Image);
+
+      Current_Note := DistanceToNote (Dist);
+      Screen_Display (Mid_Top, "Note: " & NoteToString (Current_Note));
+
       if not UARTSendNote (Current_Note) then
          exit;
       end if;

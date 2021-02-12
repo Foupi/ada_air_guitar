@@ -25,5 +25,11 @@ Specification
 Refactoring
 -----------
 
+-   All:        Write everythng according to the ADA coding style (underscores
+                + camel-case...)
 -   Shared:     Define a `Byte` type to serialize/deserialize a note
 -   Embedded:   Put all sensor GPIO initialization code in a sensor function
+-   Embedded:   Have functions return an error status instead of just crashing?
+-   Embedded:   Make `NoteToByte` public and have the UART API only send a byte
+-   Soundbox:   Make `ByteToNote` public and have the Serial API only receive a
+                byte

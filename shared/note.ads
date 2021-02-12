@@ -1,5 +1,3 @@
-with System.Storage_Elements;
-
 package Note is
 
    type Notes is

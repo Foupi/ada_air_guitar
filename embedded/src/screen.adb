@@ -20,19 +20,17 @@ package body Screen is
       Display.Update_Layer (1, Copy_Back => True);
    end ScreenSetup;
 
-   procedure ScreenDisplay (Dist : Distance; Note : Notes) is
+   procedure Screen_Clear is
    begin
       LCD_Std_Out.Clear_Screen;
+   end Screen_Clear;
 
-      LCD_Std_Out.Put (0, 0, "Dist:" & Dist'Image & "cm");
-      LCD_Std_Out.Put (0, 50, "Note: " & NoteToString (Note));
-   end ScreenDisplay;
-
-   procedure ScreenDebug (Msg : String) is
+   procedure Screen_Display (Position : Screen_Position; Msg : String) is
+      Y_Index : Screen_Index;
    begin
-      LCD_Std_Out.Clear_Screen;
+      Y_Index := Indexes (Position);
 
-      LCD_Std_Out.Put (0, 50, Msg);
-   end ScreenDebug;
+      LCD_Std_Out.Put (X_Index, Integer (Y_Index), Msg);
+   end Screen_Display;
 
 end Screen;
