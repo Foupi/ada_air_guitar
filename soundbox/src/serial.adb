@@ -18,21 +18,13 @@ package body Serial is
                     Timeout   => Time_Out);
    end SerialSetup;
    
-   function SerialReceiveNote return Notes is
+   function Serial_Receive_Byte return Stream_Element is
       Offset : Stream_Element_Offset;
       Buffer : Stream_Element_Array (1 .. 1);
-      
-      Byte   : Stream_Element;
    begin
       Receiver.Read (Buffer, Offset);
       
-      Byte := Buffer (1);
-      return ByteToNote (Byte);
-   end SerialReceiveNote;
+      return Buffer (1);
+   end Serial_Receive_Byte;
    
-   function ByteToNote (Byte : Stream_Element) return Notes is
-   begin
-      return Notes'Val(Byte);
-   end ByteToNote;
-
 end Serial;

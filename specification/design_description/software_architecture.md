@@ -43,12 +43,16 @@ result using `Note_To_Byte`, then calls `UART_Send_Byte` on this byte.
 Soundbox
 --------
 
-The `SerialRecvNote` function blocks until receiving one single byte from
-the channel connected to the board's UART.
+The `Serial_Receive_Byte` function blocks until receiving one single byte from
+the channel connected to the board's UART, then returns it.
+
+A `Note_Byte` type is defined like the one in embedded, but not a subtype of
+the same type (`UInt8` for `embedded`, `Stream_Element` here). The
+`Byte_To_Note` function deserializes the given `Note_Byte` into a `Notes`.
 
 The `PollFrequency` function shall poll a soundwave at the given frequency on
 the audio stream for a duration of one second.
 
-The `Main` loop calls `SerialRecvNote` and stores its result, then shall
-compute the corresponding frequency using `NoteToFrequency`, then call
-`PollFrequency` on the result.
+The `Main` loop calls `Serial_Receive_Byte`, then calls `Byte_To_Note` on the
+result and stores the obtained note, then shall compute the corresponding
+frequency using `NoteToFrequency`, then call `PollFrequency` on the result.

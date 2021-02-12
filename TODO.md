@@ -22,7 +22,6 @@ Debug
 -----
 
 -   Embedded: When a crash occurs, display an error message
--   Soundbox: Print received note on standard output
 
 Refactoring
 -----------
@@ -31,5 +30,3 @@ Refactoring
                 + camel-case...)
 -   Embedded:   Put all sensor GPIO initialization code in a sensor function
 -   Embedded:   Have functions return an error status instead of just crashing?
--   Soundbox:   Make `ByteToNote` public and have the Serial API only receive a
-                byte
