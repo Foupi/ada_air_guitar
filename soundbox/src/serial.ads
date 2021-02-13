@@ -1,16 +1,22 @@
-with Ada.Streams; use Ada.Streams;
+with Ada.Streams;                use Ada.Streams;
 with GNAT.Serial_Communications; use GNAT.Serial_Communications;
+
+with Deserialization;            use Deserialization;
 
 package Serial is
 
-   procedure SerialSetup;
+   Reset_Byte : constant Byte := 255;
+   --  Byte sent by the board on reset.
    
-   function Serial_Receive_Byte return Stream_Element;
+   procedure SerialSetup;
+   --  Sets up the serial port.
+   
+   function Serial_Receive_Byte return Byte;
    --  Receives one byte from the internal port.
 
 private
 
-   Receiver      : aliased Serial_Port;
+   Receiver : aliased Serial_Port;
    --  Internal Serial port.
 
 end Serial;

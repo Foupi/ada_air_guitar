@@ -6,18 +6,23 @@ with Note;            use Note;
 with Serial;          use Serial;
 
 procedure Soundbox is
-   Byte : Stream_Element;
-   Note : Notes;
+   Current_Byte : Byte;
+   Note         : Notes;
 begin
    SerialSetup;
 
    loop
       Put_Line("Waiting for byte reception!");
 
-      Byte := Serial_Receive_Byte;
-      Put_Line("Received byte: " & Byte'Image);
+      Current_Byte := Serial_Receive_Byte;
+      Put_Line("Received byte: " & Current_Byte'Image);
 
-      Note := Byte_To_Note(Byte);
-      Put_Line("Note: " & NoteToString(Note));
+      if Current_Byte = Reset_Byte then
+         Put_Line ("Board was reset!");
+      else
+         Note := Byte_To_Note(Current_Byte);
+         Put_Line("Note: " & NoteToString(Note));
+      end if;
    end loop;
+
 end Soundbox;

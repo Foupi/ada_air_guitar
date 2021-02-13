@@ -6,7 +6,6 @@ This document presents tasks that are yet to accomplish.
 Features
 --------
 
--   Soundbox: Fix UART reception
 -   Soundbox: Emit sound
 
 Specification

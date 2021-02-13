@@ -17,15 +17,15 @@ package Uart is
 
 private
 
-   TX_Pin : constant GPIO_Point := PB7;
-   RX_Pin : constant GPIO_Point := PB6;
+   TX_Pin : constant GPIO_Point := PD6;
+   RX_Pin : constant GPIO_Point := PD5;
    --  The UART GPIO pins.
 
-   Sender : USART renames USART_1;
+   Sender : USART renames USART_2;
    --  USART instead of UART? Yes. There is no tutorial anywhere so I ripped
    --  off an ADL example.
 
-   Sender_AF : GPIO_Alternate_Function := GPIO_AF_USART1_7;
+   Sender_AF : GPIO_Alternate_Function := GPIO_AF_USART2_7;
    --  USART alternate function.
 
 end Uart;
