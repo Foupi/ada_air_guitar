@@ -1,20 +1,18 @@
-with HAL.UART; use HAL.UART;
-
 package body Uart is
 
-   procedure UARTSetup is
+   procedure UART_Setup is
    begin
-      Enable_Clock (TX_Pin);
       Enable_Clock (Sender);
+      Enable_Clock (RX_Pin & TX_Pin);
 
-      Configure_IO (TX_Pin, (
-                    Mode           => Mode_AF,
-                    AF             => GPIO_AF_USART1_7,
-                    Resistors      => Pull_Up,
-                    AF_Output_Type => Push_Pull,
-                    AF_Speed       => Speed_50MHz
-                   ));
-      --  Configure TX
+      Configure_IO
+        (RX_Pin & TX_Pin,
+         (Mode           => Mode_AF,
+          AF             => Sender_AF,
+          Resistors      => Pull_Up,
+          AF_Speed       => Speed_50MHz,
+          AF_Output_Type => Push_Pull));
+      --  Configure GPIO
 
       Disable (Sender);
 
@@ -27,16 +25,15 @@ package body Uart is
       --  Set UART communication
 
       Enable (Sender);
-   end UARTSetup;
+   end UART_Setup;
 
-   function UART_Send_Byte (Byte : UInt8) return Boolean is
-      Data   : UART_Data_8b (1 .. 1);
-      Status : UART_Status;
+   procedure UART_Send_Byte (To_Send : Byte) is
    begin
-      Data (1) := Byte;
+      loop
+         exit when Tx_Ready (Sender);
+      end loop;
 
-      Sender.Transmit (Data, Status);
-      return Status = Ok;
+      Transmit (Sender, UInt9 (To_Send));
    end UART_Send_Byte;
 
 end Uart;

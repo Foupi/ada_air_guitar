@@ -1,24 +1,31 @@
-with HAL;          use HAL;
-with STM32.Device; use STM32.Device;
-with STM32.GPIO;   use STM32.GPIO;
-with STM32.USARTs; use STM32.USARTs;
+with HAL;           use HAL;
+with STM32;         use STM32;
+with STM32.Device;  use STM32.Device;
+with STM32.GPIO;    use STM32.GPIO;
+with STM32.USARTs;  use STM32.USARTs;
+
+with Serialization; use Serialization;
 
 package Uart is
 
-   procedure UARTSetup;
+   procedure UART_Setup;
    --  Sets up the UART for sending.
 
-   function UART_Send_Byte (Byte : UInt8) return Boolean;
+   procedure UART_Send_Byte (To_Send : Byte);
    --  Sends the given byte on the UART channel. Returns true if everything
    --  went correctly, false otherwise.
 
 private
 
    TX_Pin : constant GPIO_Point := PB7;
-   --  The UART TX GPIO pin
+   RX_Pin : constant GPIO_Point := PB6;
+   --  The UART GPIO pins.
 
    Sender : USART renames USART_1;
    --  USART instead of UART? Yes. There is no tutorial anywhere so I ripped
    --  off an ADL example.
+
+   Sender_AF : GPIO_Alternate_Function := GPIO_AF_USART1_7;
+   --  USART alternate function.
 
 end Uart;
