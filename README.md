@@ -4,8 +4,6 @@ ADA AIR GUITAR
 Authors
 -------
 
-
-
 -   Pierre FOUCART  <pierre.foucart@epita.fr>
 -   Thomas MICHELOT <thomas.michelot@epita.fr>
 
@@ -15,10 +13,10 @@ Description
 This project's aim is to reproduce a guitar string using a distance sensor, a
 PC and a microcontroller.
 
-Upon pressing the microcontroller's button, the microcontroller shall use the
-distance sensor, and send on the UART the note according to the obtained
+Upon pressing the microcontroller's button, the microcontroller uses the
+distance sensor, and sends on the UART the note according to the obtained
 distance ; upon receiving the note, the PC connected to the microcontroller
-shall play the according note.
+plays the according note.
 
 Hardware
 --------
@@ -28,7 +26,7 @@ The material used for this project was:
 -   A STM32F429I-DISC1 (Discovery) board;
 -   An HC-SR04 distance sensor;
 -   A breadboard;
--   An USB/USART cable;
+-   An USB/UART cable;
 -   An USB/Micro-USB cable (used for flashing, but not necessary afterwards);
 -   4 to 5 M/F wires (the fifth being used to connect the `GND` pin of the
     USART cable to that of the board, as it is quite far away from the others);
@@ -36,10 +34,12 @@ The material used for this project was:
 
 Here are the connections that shall be made:
 
--   HC-SR04 `VCC`   /   STM32 `5V`
--   HC-SR04 `Trig`  /   STM32 `PE6`
--   HC-SR04 `Echo`  /   STM32 `PE4`
--   HC-SR04 `GND`   /   STM32 `GND`
+-   HC-SR04     `VCC`   /   STM32 `5V`
+-   HC-SR04     `Trig`  /   STM32 `PE6`
+-   HC-SR04     `Echo`  /   STM32 `PE4`
+-   HC-SR04     `GND`   /   STM32 `GND`
+-   USB/UART    `TX`    /   STM32 `PD6`
+-   USB/UART    `RX`    /   STM32 `PD5`
 
 Dependencies
 ------------
@@ -53,6 +53,7 @@ For building this project you will need:
 -   The `arm-none-eabi` toolchain, needed for building binaries that can be run
     on the board;
 -   ST-Link utilities, needed for flashing the created binary on the board.
+-   The SDL library, needed by the soundbox program.
 
 Build
 -----
@@ -61,9 +62,11 @@ You must first clone this Git repository:
 
 -   `git clone --recursive git@github.com:Foupi/ada_air_guitar.git`
 
-The `--recursive` option ensures that the submodule linked to the ADA Drivers
-Library (<https://github.com/AdaCore/Ada_Drivers_Library>) is cloned as well in
-the right place.
+The `--recursive` option ensures that the submodules linked to the ADA Drivers
+Library (<https://github.com/AdaCore/Ada_Drivers_Library>) and the C Synth
+repository (<https://github.com/D0tty/synth>) are cloned as well in the right
+places.
+
 Once the repository is cloned, enter it:
 
 -   `cd ada_air_guitar`
@@ -99,9 +102,7 @@ stating that the note you tried to play does not exist), the latter being sent
 on the UART.
 
 Upon receiving the note from its connection from the board's UART, the PC
-program shall print on the standard output the note it received.
-
-Sound emission by the PC has not yet been implemented.
+program shall play the note it received.
 
 Clean
 -----
@@ -117,8 +118,8 @@ erase the `soundbox.elf` binary if it was copied at the root of the repository.
 Specification
 -------------
 
-The project specification will be available in the `specification` folder, at
-the root of this repository.
+The project specification is available in the `specification` folder, at the
+root of this repository.
 
 The specification currently holds:
 

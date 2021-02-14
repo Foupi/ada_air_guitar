@@ -11,7 +11,6 @@ Features
 Specification
 -------------
 
--   Draw a schema for the software architecture
 -   Write the low-level requirements
 -   Write the trace data
 -   Develop pre and post conditions meeting these requirements
