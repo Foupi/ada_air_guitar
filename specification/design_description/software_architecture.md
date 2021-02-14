@@ -5,8 +5,7 @@ This document describes the software architecture of the project. It is split
 between what is used by both the embedded and soundbox programs, and then the
 specific parts of each program.
 
-In the future, a schema shall be drawn to visually convey the flow of the
-architecture.
+![](./software_architecture.png)
 
 Shared
 ------
