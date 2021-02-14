@@ -22,6 +22,7 @@ package body Serial is
       Offset : Stream_Element_Offset;
       Buffer : Stream_Element_Array (1 .. 1);
    begin
+      --  Buffer (1) := Notes'Pos (Nothing);
       Receiver.Read (Buffer, Offset);
       
       return Byte (Buffer (1));

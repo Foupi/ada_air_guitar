@@ -11,6 +11,8 @@ procedure Soundbox is
 
    procedure Play_Note (N : Notes) is
    begin
+      Put_Line("Sending " & Notes'Pos (N)'Image);
+
       set_note (Notes'Pos (N));
    end Play_Note;
 
@@ -19,6 +21,7 @@ procedure Soundbox is
 
 begin
    SerialSetup;
+   audio_setup;
 
    loop
       Put_Line ("Waiting for byte reception!");
