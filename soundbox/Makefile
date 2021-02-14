@@ -19,6 +19,7 @@ prove:
 clean:
 	$(GPRCLEAN) -r
 	$(RM) $(ELF)
+	$(RM) -r obj
 
 FORCE:
 

@@ -26,9 +26,11 @@ procedure Soundbox is
 
    Current_Byte : Byte;
    Note         : Notes;
+   Standby      : Boolean := False;
 begin
    SerialSetup;
    Audio_Initialization;
+   Put_Line ("Ready to play!");
 
    loop
       Put_Line ("");
@@ -38,11 +40,18 @@ begin
       Put_Line ("Received byte: " & Current_Byte'Image);
 
       if Current_Byte = Reset_Byte then
-         Put_Line ("Board was reset!");
-      else
+         Standby := not Standby;
+         if not Standby then
+            Put_Line ("Ready to play!");
+         else
+            Put_Line ("Standby mode!");
+         end if;
+      elsif not Standby then
          Note := Byte_To_Note (Current_Byte);
          Put_Line ("Note: " & NoteToString (Note));
          Play_Note (Note);
+      else
+         null;
       end if;
    end loop;
 
