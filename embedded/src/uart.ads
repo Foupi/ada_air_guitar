@@ -1,8 +1,8 @@
-with HAL;           use HAL;
-with STM32;         use STM32;
-with STM32.Device;  use STM32.Device;
-with STM32.GPIO;    use STM32.GPIO;
-with STM32.USARTs;  use STM32.USARTs;
+with HAL;          use HAL;
+with STM32;        use STM32;
+with STM32.Device; use STM32.Device;
+with STM32.GPIO;   use STM32.GPIO;
+with STM32.USARTs; use STM32.USARTs;
 
 with Serialization; use Serialization;
 

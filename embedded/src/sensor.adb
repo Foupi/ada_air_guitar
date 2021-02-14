@@ -3,10 +3,10 @@ package body Sensor is
    function GetDistance (Self : in out Sonar) return Distance is
       Period_2_Microseconds  : constant Time_Span := Microseconds (2);
       Period_10_Microseconds : constant Time_Span := Microseconds (10);
-      SpeedOfSonudInCmPerMs  : constant Float := 0.033_13 + 0.000_060_6
-        * 19.307;
-      DurationMicroseconds   : Float;
-      DistanceCm             : Float;
+      SpeedOfSonudInCmPerMs  : constant Float     :=
+        0.033_13 + 0.000_060_6 * 19.307;
+      DurationMicroseconds : Float;
+      DistanceCm           : Float;
    begin
       --  Make sure that trigger pin is LOW.
       Self.Pin_Trigger.Set_Mode (HAL.GPIO.Output);

@@ -7,20 +7,17 @@ package body Uart is
 
       Configure_IO
         (RX_Pin & TX_Pin,
-         (Mode           => Mode_AF,
-          AF             => Sender_AF,
-          Resistors      => Pull_Up,
-          AF_Speed       => Speed_50MHz,
-          AF_Output_Type => Push_Pull));
+         (Mode     => Mode_AF, AF => Sender_AF, Resistors => Pull_Up,
+          AF_Speed => Speed_50MHz, AF_Output_Type => Push_Pull));
       --  Configure GPIO
 
       Disable (Sender);
 
-      Set_Baud_Rate    (Sender, 115_200);
-      Set_Mode         (Sender, Tx_Rx_Mode);
-      Set_Stop_Bits    (Sender, Stopbits_1);
-      Set_Word_Length  (Sender, Word_Length_8);
-      Set_Parity       (Sender, No_Parity);
+      Set_Baud_Rate (Sender, 115_200);
+      Set_Mode (Sender, Tx_Rx_Mode);
+      Set_Stop_Bits (Sender, Stopbits_1);
+      Set_Word_Length (Sender, Word_Length_8);
+      Set_Parity (Sender, No_Parity);
       Set_Flow_Control (Sender, No_Flow_Control);
       --  Set UART communication
 

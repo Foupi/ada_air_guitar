@@ -123,7 +123,7 @@ the root of this repository.
 The specification currently holds:
 
 -   The software requirements data, holding the high-level requirements;
--   A description of the software architecture;
+-   The software architecture;
 -   Links towards the developed source code.
 
 In the future, it shall hold:

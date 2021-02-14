@@ -30,7 +30,7 @@ sensor.
 A `Note_Byte` type is defined, representing a serialized note on one byte. The
 `Note_To_Byte` function serializes the given `Notes` into a `Note_Byte`.
 
-The `UART_Send_Byte` function sends the given byte on the given UART TX pin.
+The `UART_Send_Byte` function sends the given byte on the given `UART TX (PD6)` pin. The `UART RX (PD5)` pin is also defined but not used as the embedded software is emit only.
 
 The `Main` loop waits for a button press, stores the result of `GetDistance`,
 computes and stores the corresponding note using `DistanceToNote`, converts the

@@ -22,14 +22,11 @@ private
 
    type Position_Indexes is array (Screen_Position range <>) of Screen_Index;
 
-   Indexes : constant Position_Indexes := (Top        => Screen_Index'First,
-                                           Mid_Top    =>
-                                             (Screen_Index'Last
-                                              - Screen_Index'First) / 3,
-                                           Mid_Bottom =>
-                                             ((Screen_Index'Last
-                                              - Screen_Index'First) / 3) * 2,
-                                           Bottom     => Screen_Index'Last);
+   Indexes : constant Position_Indexes :=
+     (Top        => Screen_Index'First,
+      Mid_Top    => (Screen_Index'Last - Screen_Index'First) / 3,
+      Mid_Bottom => ((Screen_Index'Last - Screen_Index'First) / 3) * 2,
+      Bottom     => Screen_Index'Last);
    --  The indexes related to each position of the enumerated type.
 
 end Screen;

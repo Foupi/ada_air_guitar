@@ -2,7 +2,7 @@ with HAL.Bitmap;
 with HAL.Framebuffer;
 with STM32.Board; use STM32.Board;
 with LCD_Std_Out; use LCD_Std_Out;
-with BMP_Fonts; use BMP_Fonts;
+with BMP_Fonts;   use BMP_Fonts;
 
 package body Screen is
 
