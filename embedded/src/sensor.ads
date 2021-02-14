@@ -12,11 +12,14 @@ package Sensor is
       Pin_Echo    : STM32.GPIO.GPIO_Point := STM32.Device.PE4;
    end record;
 
-   function GetDistance (Self : in out Sonar) return Distance;
-   --  Returns the distance measured by the sensor
+   function GetDistance (Self : in out Sonar) return Distance with
+      Pre => Self.Initialized;
+      --  Returns the distance measured by the sensor
 
-   procedure Initialize (Self : in out Sonar);
-   --  Initialize the sonar GPIOs
+   procedure Initialize (Self : in out Sonar) with
+      Pre  => not Self.Initialized,
+      Post => Self.Initialized;
+      --  Initialize the sonar GPIOs
 
    function Initialized (Self : Sonar) return Boolean;
    --  Returns wether the sensor is initialized or not

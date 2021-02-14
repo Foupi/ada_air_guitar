@@ -35,6 +35,7 @@ flash:: $(BIN)
 clean::
 	$(GPRCLEAN) -r
 	$(RM) $(ELF) $(HEX) $(BIN)
+	$(RM) -r obj
 
 FORCE:
 
