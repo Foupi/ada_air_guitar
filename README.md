@@ -37,11 +37,18 @@ The material used for this project was:
 Here are the connections that shall be made:
 
 |  Sensor (HC-SR04)  | Board (STM32) |
-| ------------------ | ---- |
-| `VCC`  | `5V` |
-| `Trig` | `PE6` |
-| `Echo` | `PE4` |
-| `GND`  | `GND` |
+| ------------------ | ------------- |
+| `VCC`              | `5V`          |
+| `Trig`             | `PE6`         |
+| `Echo`             | `PE4`         |
+| `GND`              | `GND`         |
+
+| USB/UART | Board (STM32) |
+| -------- | ------------- |
+| `TX`     | `PD6`         |
+| `RX`     | `PD5`         |
+
+
 
 Dependencies
 ------------
@@ -55,6 +62,7 @@ For building this project you will need:
 -   The `arm-none-eabi` toolchain, needed for building binaries that can be run
     on the board;
 -   ST-Link utilities, needed for flashing the created binary on the board.
+-   The SDL library, needed for the soudbox program.
 
 Build
 -----
@@ -103,9 +111,9 @@ stating that the note you tried to play does not exist), the latter being sent
 on the UART.
 
 Upon receiving the note from its connection from the board's UART, the PC
-program shall print on the standard output the note it received.
+program shall print on the standard output the note it received and play it on
+the speakers.
 
-Sound emission by the PC has not yet been implemented.
 
 Clean
 -----
@@ -121,18 +129,28 @@ erase the `soundbox.elf` binary if it was copied at the root of the repository.
 Specification
 -------------
 
-The project specification will be available in the `specification` folder, at
-the root of this repository.
+The project specification is available in the `specification` folder, at the
+root of this repository.
 
 The specification currently holds:
 
 -   The software requirements data, holding the high-level requirements;
 -   The software architecture;
 -   Links towards the developed source code.
+-   LLR
 
 In the future, it shall hold:
 
 -   The trace data, holding the links between HLRs, LLRs and elements of the
     architecture;
--   The test cases for functions that could easily be tested (those not
-    involving I/O).
+
+Notes
+--------
+As finding a well-documented ADA sound library that looked like what we
+needed was near impossible, we decided to interface ourselves with some C
+code. We forked from this repository: <https://github.com/remram44/synth>
+As most of our functions either use I/O that is non-trivial to mock or
+consist in `case`-like control structures, we found that implementing test
+cases was too painful of a process.
+Most pre and post-conditions for our functions are defined by the types
+they use as input or output.
