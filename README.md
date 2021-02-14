@@ -134,3 +134,15 @@ In the future, it shall hold:
     architecture;
 -   The test cases for functions that could easily be tested (those not
     involving I/O).
+
+Notes
+-----
+
+-   As finding a well-documented ADA sound library that looked like what we
+    needed was near impossible, we decided to interface ourselves with some C
+    code. We forked from this repository: <https://github.com/remram44/synth>
+-   As most of our functions either use I/O that is non-trivial to mock or
+    consist in `case`-like control structures, we found that implementing test
+    cases was too painful of a process.
+-   Most pre and post-conditions for our functions are defined by the types
+    they use as input or output.
