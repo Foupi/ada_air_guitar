@@ -1,6 +1,13 @@
 project Soundbox is
-    for Source_Dirs use ("src", "../shared");
-    for Object_Dir use "obj";
-    for Main use ("soundbox.adb");
-    for Create_Missing_Dirs use "True";
+   for Languages use ("ada", "c");
+   for Source_Dirs use ("src", "../shared", "./synth/src");
+   for Object_Dir use "obj";
+   for Main use ("soundbox.adb");
+   for Create_Missing_Dirs use "True";
+
+   package Linker is
+      for Default_Switches ("Ada") use ("-L/usr/lib", "-lm", "-lpthread", "-lSDL");
+   end Linker;
+
+
 end Soundbox;
