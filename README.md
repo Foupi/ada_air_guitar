@@ -4,8 +4,10 @@ ADA AIR GUITAR
 Authors
 -------
 
--   Thomas MICHELOT <thomas.michelot@epita.fr>
+
+
 -   Pierre FOUCART  <pierre.foucart@epita.fr>
+-   Thomas MICHELOT <thomas.michelot@epita.fr>
 
 Description
 -----------

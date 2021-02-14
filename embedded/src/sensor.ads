@@ -8,8 +8,8 @@ with Dist; use Dist;
 package Sensor is
 
    type Sonar is record
-      Pin_Trigger : STM32.GPIO.GPIO_Point := STM32.Device.PA4;
-      Pin_Echo    : STM32.GPIO.GPIO_Point := STM32.Device.PC6;
+      Pin_Trigger : STM32.GPIO.GPIO_Point := STM32.Device.PE6;
+      Pin_Echo    : STM32.GPIO.GPIO_Point := STM32.Device.PE4;
    end record;
 
    function GetDistance (Self : in out Sonar) return Distance;
