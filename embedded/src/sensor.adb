@@ -66,4 +66,27 @@ package body Sensor is
       return To_Duration (Time_Stop - Time_Start);
    end PulseInHigh;
 
+   procedure Initialize (Self : in out Sonar) is
+   begin
+      STM32.GPIO.Configure_IO
+        (Self.Pin_Trigger,
+         (Mode  => STM32.GPIO.Mode_Out, Output_Type => STM32.GPIO.Push_Pull,
+          Speed => STM32.GPIO.Speed_100MHz, Resistors => STM32.GPIO.Floating));
+      --  OUTPUT TRIGGER
+
+      STM32.GPIO.Configure_IO
+        (Self.Pin_Echo,
+         (Mode => STM32.GPIO.Mode_In, Resistors => STM32.GPIO.Floating));
+      --  INPUT ECHO
+
+      Self.Pin_Trigger.Clear;
+      Self.Pin_Echo.Clear;
+      Is_Initialized := True;
+   end Initialize;
+
+   function Initialized (Self : Sonar) return Boolean is
+   begin
+      return Is_Initialized;
+   end Initialized;
+
 end Sensor;

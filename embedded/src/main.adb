@@ -23,22 +23,9 @@ begin
    STM32.User_Button.Initialize;
    All_LEDs_Off;
 
+   Distance_Sensor.Initialize;
    ScreenSetup;
    UART_Setup;
-
-   STM32.GPIO.Configure_IO
-     (Distance_Sensor.Pin_Trigger,
-      (Mode  => STM32.GPIO.Mode_Out, Output_Type => STM32.GPIO.Push_Pull,
-       Speed => STM32.GPIO.Speed_100MHz, Resistors => STM32.GPIO.Floating));
-   --  OUTPUT TRIGGER
-
-   STM32.GPIO.Configure_IO
-     (Distance_Sensor.Pin_Echo,
-      (Mode => STM32.GPIO.Mode_In, Resistors => STM32.GPIO.Floating));
-   --  INPUT ECHO
-
-   Distance_Sensor.Pin_Trigger.Clear;
-   Distance_Sensor.Pin_Echo.Clear;
 
    Screen_Display (Mid_Top, "Setup complete!");
 
@@ -53,7 +40,7 @@ begin
 
       Screen_Clear;
 
-      Dist := GetDistance (Distance_Sensor);
+      Dist := Distance_Sensor.GetDistance;
       Screen_Display (Top, "Distance: " & Dist'Image);
 
       Current_Note := DistanceToNote (Dist);

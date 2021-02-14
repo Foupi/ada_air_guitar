@@ -7,15 +7,23 @@ with Dist; use Dist;
 
 package Sensor is
 
-   type Sonar is record
+   type Sonar is tagged record
       Pin_Trigger : STM32.GPIO.GPIO_Point := STM32.Device.PE6;
       Pin_Echo    : STM32.GPIO.GPIO_Point := STM32.Device.PE4;
    end record;
 
    function GetDistance (Self : in out Sonar) return Distance;
-   --  Returns the distance measured by the sensor.
+   --  Returns the distance measured by the sensor
+
+   procedure Initialize (Self : in out Sonar);
+   --  Initialize the sonar GPIOs
+
+   function Initialized (Self : Sonar) return Boolean;
+   --  Returns wether the sensor is initialized or not
 
 private
+
+   Is_Initialized : Boolean := False;
 
    function PulseInHigh
      (Pin_Echo : STM32.GPIO.GPIO_Point; Timeout : Time_Span := Seconds (5))
