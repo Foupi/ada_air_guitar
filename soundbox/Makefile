@@ -23,5 +23,5 @@ clean:
 FORCE:
 
 $(ELF): FORCE
-	$(GPRBUILD) -XBUILD=$(BUILD) $(GPR)
+	$(GPRBUILD) -XBUILD=$(BUILD) -j`nproc` $(GPR)
 	cp $(BUILDDIR)/$(PROJ) $(ELF)
