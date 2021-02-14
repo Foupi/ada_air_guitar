@@ -27,10 +27,12 @@ Soundbox program
     idle state.
 -   8: Upon receiving a byte, the play sequence, composed of byte translation
     and sound playing shall be initiated.
--   9: The received byte shall be translated as a note.
--   10: Once a note is received, the corresponding frequency shall be played by
-    the computer for a duration of 1s (potentially with a fade-out).
--   11: If a note is received while another one is being played, then the note
+-   9: If no byte is received during a full second, then the play sequence
+    shall be initiated with the byte representing the empty note (silence).
+-   10: The received byte shall be translated as a note.
+-   11: Once a note is received, the corresponding frequency shall be played by
+    the computer.
+-   12: If a note is received while another one is being played, then the note
     being played shall be interrupted and replaced by the newly received one.
--   12: When the event of the note playing for one second is registered, the
-    program shall go back to an idle state until another note is received.
+-   13: When the note to play is registered, the program shall go back to an
+    idle state until another note is received.
