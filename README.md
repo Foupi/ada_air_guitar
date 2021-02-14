@@ -4,8 +4,6 @@ ADA AIR GUITAR
 Authors
 -------
 
-
-
 -   Pierre FOUCART  <pierre.foucart@epita.fr>
 -   Thomas MICHELOT <thomas.michelot@epita.fr>
 
@@ -19,6 +17,8 @@ Upon pressing the microcontroller's button, the microcontroller shall use the
 distance sensor, and send on the UART the note according to the obtained
 distance ; upon receiving the note, the PC connected to the microcontroller
 shall play the according note.
+
+Short video to see it in action: https://youtu.be/l0NuXQg1Mrs
 
 Hardware
 --------
@@ -36,10 +36,12 @@ The material used for this project was:
 
 Here are the connections that shall be made:
 
--   HC-SR04 `VCC`   /   STM32 `5V`
--   HC-SR04 `Trig`  /   STM32 `PE6`
--   HC-SR04 `Echo`  /   STM32 `PE4`
--   HC-SR04 `GND`   /   STM32 `GND`
+|  Sensor (HC-SR04)  | Board (STM32) |
+| ------------------ | ---- |
+| `VCC`  | `5V` |
+| `Trig` | `PE6` |
+| `Echo` | `PE4` |
+| `GND`  | `GND` |
 
 Dependencies
 ------------
@@ -59,14 +61,16 @@ Build
 
 You must first clone this Git repository:
 
--   `git clone --recursive git@github.com:Foupi/ada_air_guitar.git`
+- `git clone --recursive git@github.com:Foupi/ada_air_guitar.git`
 
-The `--recursive` option ensures that the submodule linked to the ADA Drivers
-Library (<https://github.com/AdaCore/Ada_Drivers_Library>) is cloned as well in
-the right place.
-Once the repository is cloned, enter it:
+  The `--recursive` option ensures that all the submodules are populated as well. The submodules currently are:
 
--   `cd ada_air_guitar`
+  * <https://github.com/AdaCore/Ada_Drivers_Library> for the board driver
+  * https://github.com/D0tty/synth to interface with and make sound
+
+-   Once the repository is cloned, enter it:
+
+    `cd ada_air_guitar`
 
 At the root of the repository, there is a Makefile, which defines an `all`
 rule, which creates both the binary that shall be flashed on the board and the
@@ -128,7 +132,6 @@ The specification currently holds:
 
 In the future, it shall hold:
 
--   The design description, holding the low-level requirements;
 -   The trace data, holding the links between HLRs, LLRs and elements of the
     architecture;
 -   The test cases for functions that could easily be tested (those not

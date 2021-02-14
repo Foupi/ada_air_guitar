@@ -1,12 +1,12 @@
-Software Requirements
-=====================
+# Software Requirements
+
 
 This document holds the high-level requirements for this project. These
 requirements are split between those of the embedded program and those of the
 soundbox program.
 
-Embedded program
-----------------
+## Embedded program
+
 
 -   1: Until the button is pressed, the program shall stay in an idle state.
 -   2: Upon pressing the button, the detection sequence composed of distance
@@ -20,8 +20,8 @@ Embedded program
 -   6: At the end of the detection sequence, the program shall go back to an
     idle state until the button is pressed again.
 
-Soundbox program
-----------------
+## Soundbox program
+
 
 -   7: Until a byte is received from the board, the program shall stay in an
     idle state.
@@ -34,3 +34,8 @@ Soundbox program
     being played shall be interrupted and replaced by the newly received one.
 -   12: When the event of the note playing for one second is registered, the
     program shall go back to an idle state until another note is received.
+
+## LLR
+
+The low-lever requierments are hold by the Pre and Post conditions.
+They are currently only needed for the Sensor class inside the `embeded` subproject as the other functions or code part are hardware linked or I/O linked.
